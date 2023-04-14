@@ -16,7 +16,7 @@
             }
             #centre-body {
                 margin: auto;
-                width: 20%;
+                width: 75%;
                 flex-direction: column;
                 display: flex;
                 justify-content: center;
@@ -25,41 +25,41 @@
                 min-height: 100vh;
             }
             #login {
-                border: solid;
+                border: 3px solid;
                 padding: 5%;
-            }
-            #login h1 {
-                align-self: center;
-                display: flex;
-                justify-content: space-around;
-            }
-            #login form {
-                display: flex;
-                justify-content: space-around;
-            }
-            .form-button {
-                
+                border-radius: 5px;
+                background-color: #dfdfdf;
             }
         </style>
+        <%@include file="include.jsp" %>
     </head>
     <body>
         <div id="centre-body">
             <div id="login">
-                <h1>Login page</h1>
+                <h2>Login page</h2>
                 <form>
                     <table>
                         <tr>
-                            <td>Username:</td>
-                            <td colspan="2"><input type="text" /></td>
+                            <td><label for="username">Username:</label></td>
+                            <td colspan="2"><input type="text" class="form-control" id="username"/></td>
                         </tr>
                         <tr>
-                            <td>Password:</td>
-                            <td colspan="2"><input type="password" /></td>
+                            <td><label for="pw">Password:</label></td>
+                            <td colspan="2"><input type="password" class="form-control" id="pw" /></td>
                         </tr>
                         <tr>
-                            <td><button class="form-button">Forget password</button></td>
-                            <td><button  class="form-button">Register Member</button></td>
-                            <td><input  class="form-button" type="submit" value="login" /></td>
+                            <td colspan="1">    
+                                <div class="form-check mt-2 mb-2">
+                                    <label class="form-check-label">
+                                        <input class="form-check-input" type="checkbox" name="remember"> Remember me
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><button class="btn btn-danger">Forget password</button></td>
+                            <td><button  class="btn btn-secondary">Register Member</button></td>
+                            <td><input  class="btn btn-primary" type="submit" value="login" /></td>
                         </tr>
                     </table>
                 </form>
