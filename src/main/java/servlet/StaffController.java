@@ -4,6 +4,7 @@
  */
 package servlet;
 
+import bean.Venue;
 import bean.VenueMember;
 import db.TestDatabase;
 import jakarta.servlet.ServletException;
@@ -41,7 +42,7 @@ public class StaffController extends HttpServlet {
         }
         TestDatabase db = getDB(request);
         switch (request.getParameter("action")) {
-            case "manageMember":
+            case "listMember":
                 ArrayList<VenueMember> members = (ArrayList<VenueMember>) request.getAttribute("members");
                 if (members == null) {
                     request.setAttribute("members", db.getMembers());
@@ -60,10 +61,10 @@ public class StaffController extends HttpServlet {
                             .getRequestDispatcher("/member_form.jsp")
                             .forward(request, response);
                 } else {
-                    response.sendRedirect("staff?action=manageMember");
+                    response.sendRedirect("staff?action=listMember");
                 }
             } catch (Exception e) {
-                response.sendRedirect("staff?action=manageMember");
+                response.sendRedirect("staff?action=listMember");
             }
             break;
             case "addMember":
@@ -73,6 +74,30 @@ public class StaffController extends HttpServlet {
                         .getRequestDispatcher("/member_form.jsp")
                         .forward(request, response);
                 break;
+            case "listVenue":
+                ArrayList<Venue> venues = (ArrayList<Venue>) request.getAttribute("venues");
+                if (venues == null) {
+                    request.setAttribute("venues", db.getVenues());
+                }
+                this.getServletContext()
+                        .getRequestDispatcher("/venue_list.jsp")
+                        .forward(request, response);
+                break;
+            case "modifyVenue":
+                try {
+                Venue v = db.getVenue(Integer.parseInt(request.getParameter("id")));
+                if (v != null) {
+                    request.setAttribute("userAction", "edit");
+                    request.setAttribute("venue", v);
+                    this.getServletContext()
+                            .getRequestDispatcher("/venue_form.jsp")
+                            .forward(request, response);
+                } else {
+                    response.sendRedirect("staff?action=listVenue");
+                }
+            } catch (Exception e) {
+                response.sendRedirect("staff?action=listVenue");
+            }
             default:
                 break;
         }

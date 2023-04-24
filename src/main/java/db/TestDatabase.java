@@ -7,6 +7,7 @@ package db;
 import bean.VenueMember;
 import bean.SeniorStaff;
 import bean.Staff;
+import bean.Venue;
 import java.util.ArrayList;
 
 /**
@@ -19,6 +20,7 @@ public class TestDatabase {
     private int ms_idx = 4;
     private ArrayList<Staff> ss = new ArrayList<>();
     private ArrayList<SeniorStaff> sss = new ArrayList<>();
+    private ArrayList<Venue> vs = new ArrayList<>();
 
     public ArrayList<VenueMember> getMembers() {
         return ms;
@@ -30,6 +32,10 @@ public class TestDatabase {
 
     public ArrayList<SeniorStaff> getSeniorStaffs() {
         return sss;
+    }
+
+    public ArrayList<Venue> getVenues() {
+        return vs;
     }
 
     public VenueMember getMember(String username, String password) {
@@ -45,6 +51,15 @@ public class TestDatabase {
         for (VenueMember m : getMembers()) {
             if (m.getId() == id) {
                 return m;
+            }
+        }
+        return null;
+    }
+    
+        public Venue getVenue(int id) {
+        for (Venue v : getVenues()) {
+            if (v.getId() == id) {
+                return v;
             }
         }
         return null;
@@ -81,5 +96,6 @@ public class TestDatabase {
         ms.add(new VenueMember(1, "username1", "name1", "123"));
         ms.add(new VenueMember(2, "username2", "name2", "234"));
         ms.add(new VenueMember(3, "username3", "name3", "345"));
+        vs.add(new Venue(1, 72, "SAMPLE IMAGE", "Sample Venue 1", "Sample Type 1", "72x72", "Sample Location", "Sample Description", true));
     }
 }

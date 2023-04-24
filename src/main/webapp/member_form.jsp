@@ -33,7 +33,7 @@
                     <td><input type="password" value="<%=member.getName() != null ? member.getPassword() : "" %>" name="password"/></td>
                 </tr>
                 <tr>
-                    <td><button onclick="history.back()">Back</button></td>
+                    <td><input type="button" onclick="history.back()" value="Back" /></td>
                     <td><input type="submit" value="Submit"/></td>
                 </tr>
             </table>

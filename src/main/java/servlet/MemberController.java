@@ -41,7 +41,7 @@ public class MemberController extends HttpServlet {
         switch (request.getParameter("action")) {
             case "delete":
                 db.removeMember(Integer.parseInt(request.getParameter("id")));
-                response.sendRedirect("staff?action=manageMember");
+                response.sendRedirect("staff?action=listMember");
                 break;
             default:
                 break;
@@ -60,13 +60,13 @@ public class MemberController extends HttpServlet {
                     m.setUsername(request.getParameter("username"));
                     m.setPassword(request.getParameter("password"));
                 }
-                response.sendRedirect("staff?action=manageMember");
+                response.sendRedirect("staff?action=listMember");
                 break;
             case "create":
                 db.addMember(request.getParameter("username"),
                         request.getParameter("password"),
                         request.getParameter("name"));
-                response.sendRedirect("staff?action=manageMember");
+                response.sendRedirect("staff?action=listMember");
                 break;
             default:
                 break;
