@@ -69,7 +69,7 @@ public class StaffController extends HttpServlet {
             break;
             case "addMember":
                 request.setAttribute("userAction", "create");
-                    request.setAttribute("member", new VenueMember());
+                request.setAttribute("member", new VenueMember());
                 this.getServletContext()
                         .getRequestDispatcher("/member_form.jsp")
                         .forward(request, response);
@@ -84,10 +84,9 @@ public class StaffController extends HttpServlet {
                         .forward(request, response);
                 break;
             case "modifyVenue":
-                try {
                 Venue v = db.getVenue(Integer.parseInt(request.getParameter("id")));
                 if (v != null) {
-                    request.setAttribute("userAction", "edit");
+                    request.setAttribute("venueAction", "edit");
                     request.setAttribute("venue", v);
                     this.getServletContext()
                             .getRequestDispatcher("/venue_form.jsp")
@@ -95,10 +94,21 @@ public class StaffController extends HttpServlet {
                 } else {
                     response.sendRedirect("staff?action=listVenue");
                 }
-            } catch (Exception e) {
-                response.sendRedirect("staff?action=listVenue");
-            }
+                try {
+
+                } catch (Exception e) {
+                    response.sendRedirect("staff?action=listVenue");
+                }
+                break;
+            case "addVenue":
+                request.setAttribute("venueAction", "create");
+                request.setAttribute("venue", new Venue());
+                this.getServletContext()
+                        .getRequestDispatcher("/venue_form.jsp")
+                        .forward(request, response);
+                break;
             default:
+                response.getWriter().println("Action not found...");
                 break;
         }
     }

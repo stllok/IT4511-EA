@@ -100,5 +100,6 @@ public class Venue implements Serializable {
     }
 
     public Venue() {
+        this.ListOnBookingSystem = false;
     }
 }

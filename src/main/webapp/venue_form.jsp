@@ -12,41 +12,45 @@
     <jsp:useBean id="venueAction" scope="request" class="String" />
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title><%=userAction %> venue</title>
+        <title><%=venueAction %> venue</title>
     </head>
     <body>
-        <h1><%=userAction %> venue</h1>
+        <h1><%=venueAction %> venue</h1>
         <form method="post" action="venue">
-            <input type="hidden" value="<%=userAction %>" name="action"  />
+            <input type="hidden" value="<%=venueAction %>" name="action"  />
             <input type="hidden" value="<%=venue.getName() != null ? venue.getId() : "" %>" name="id"  />
             <table>
                 <tr>
                     <td>Name:</td>
-                    <td><input type="text" value="<%=member.getName() != null ? member.getName() : "" %>" name="name"/></td>
+                    <td><input type="text" value="<%=venue.getName() != null ? venue.getName() : "" %>" name="name"/></td>
                 </tr>
                 <tr>
                     <td>Type:</td>
-                    <td><input type="text" value="<%=member.getType() != null ? member.getType() : "" %>" name="type"/></td>
+                    <td><input type="text" value="<%=venue.getType() != null ? venue.getType() : "" %>" name="type"/></td>
                 </tr>
                 <tr>
                     <td>Location:</td>
-                    <td><input type="text" value="<%=member.getLocation() != null ? member.getLocation() : "" %>" name="location"/></td>
+                    <td><input type="text" value="<%=venue.getLocation() != null ? venue.getLocation() : "" %>" name="location"/></td>
                 </tr>
                 <tr>
                     <td>Capacity:</td>
-                    <td><input type="text" value="<%=member.getCapacity() != null ? member.getCapacity() : "" %>" name="capacity"/></td>
+                    <td><input type="text" value="<%=venue.getCapacity() != null ? venue.getCapacity() : "" %>" name="capacity"/></td>
                 </tr>
                 <tr>
-                    <td>Description</td>
-                    <td><textarea id="w3review" name="description" rows="4" cols="50"><%=member.getDescription() != null ? member.getDescription() : "" %></textarea></td>
+                    <td>Description:</td>
+                    <td><textarea  name="description" rows="4" cols="50"><%=venue.getDescription() != null ? venue.getDescription() : "" %></textarea></td>
                 </tr>
                 <tr>
                     <td>Image:</td>
-                    <td><input type="text" value="<%=member.getImg() != null ? member.getImg() : "" %>" name="image"/></td>
+                    <td><input type="text" value="<%=venue.getImg() != null ? venue.getImg() : "" %>" name="image"/></td>
                 </tr>
                 <tr>
                     <td>Booking Fee:</td>
-                    <td><input type="number" min="0" value="<%=member.getName() != null ? member.getPassword() : "0" %>" name="password" /></td>
+                    <td><input type="number" min="0" <%=venue.getName() != null ? "value=" + venue.getBookingFee() : "" %> name="bookingfee" /></td>
+                </tr>
+                <tr>
+                    <td>List on Booking System:</td>
+                    <td><input type="checkbox" <%=venue.isListOnBookingSystem() ? "checked" : "" %> name="listonbooking" /></td>
                 </tr>
                 <tr>
                     <td><input type="button" onclick="history.back()" value="Back" /></td>

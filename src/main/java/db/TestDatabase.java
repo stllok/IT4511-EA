@@ -21,6 +21,7 @@ public class TestDatabase {
     private ArrayList<Staff> ss = new ArrayList<>();
     private ArrayList<SeniorStaff> sss = new ArrayList<>();
     private ArrayList<Venue> vs = new ArrayList<>();
+    private int vs_idx = 2;
 
     public ArrayList<VenueMember> getMembers() {
         return ms;
@@ -55,8 +56,8 @@ public class TestDatabase {
         }
         return null;
     }
-    
-        public Venue getVenue(int id) {
+
+    public Venue getVenue(int id) {
         for (Venue v : getVenues()) {
             if (v.getId() == id) {
                 return v;
@@ -74,9 +75,8 @@ public class TestDatabase {
         return null;
     }
 
-    public boolean addMember(String username, String password, String name) {
+    public void addMember(String username, String password, String name) {
         ms.add(new VenueMember(ms_idx++, username, name, password));
-        return true;
     }
 
     public void removeMember(int id) {
@@ -86,6 +86,19 @@ public class TestDatabase {
                 return;
             }
         }
+    }
+
+    public void removeVenue(int id) {
+        for (int i = 0; i < vs.size(); i++) {
+            if (vs.get(i).getId() == id) {
+                vs.remove(i);
+                return;
+            }
+        }
+    }
+
+    public void addVenue(int bookingFee, String img, String name, String type, String capacity, String location, String description, boolean ListOnBookingSystem) {
+        vs.add(new Venue(vs_idx++, bookingFee, img, name, type, capacity, location, description, ListOnBookingSystem));
     }
 
     public boolean addStaff(String username, String password) {

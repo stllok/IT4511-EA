@@ -1,4 +1,4 @@
-<%-- 
+ <%-- 
     Document   : user_management
     Created on : 2023年4月24日, 下午1:57:51
     Author     : kelvinleung
@@ -44,7 +44,7 @@
                     + "<td>" + v.getImg() + "</td>"
                     + "<td>" + v.getBookingFee() + "</td>"
                     + "<td>" + v.isListOnBookingSystem() + "</td>"
-                    + "<td><a href=\"#\">Toggle Listing</a> <a href=\"staff?action=modifyVenuer&id=" + v.getId() + "\">Edit</a> <a href=\"venue?action=delete&id=" + v.getId() + "\">Delete</a></td>");
+                    + "<td><a href=\"staff?action=modifyVenue&id=" + v.getId() + "\">Edit</a> <a href=\"venue?action=delete&id=" + v.getId() + "\">Delete</a></td>");
                 }
             %>
             <tr>

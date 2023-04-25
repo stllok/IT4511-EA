@@ -4,8 +4,6 @@
  */
 package servlet;
 
-import bean.VenueMember;
-import bean.Staff;
 import bean.Venue;
 import db.TestDatabase;
 import jakarta.servlet.ServletException;
@@ -19,7 +17,7 @@ import java.io.IOException;
  *
  * @author kelvinleung
  */
-@WebServlet(name = "VenueController", urlPatterns = {"/api/venue"})
+@WebServlet(name = "VenueController", urlPatterns = {"/venue"})
 public class VenueController extends HttpServlet {
 
     @Override
@@ -40,8 +38,8 @@ public class VenueController extends HttpServlet {
         TestDatabase db = getDB(request);
         switch (request.getParameter("action")) {
             case "delete":
-                db.removeMember(Integer.parseInt(request.getParameter("id")));
-                response.sendRedirect("staff?action=manageMember");
+                db.removeVenue(Integer.parseInt(request.getParameter("id")));
+                response.sendRedirect("staff?action=listVenue");
                 break;
             default:
                 break;
@@ -54,17 +52,30 @@ public class VenueController extends HttpServlet {
         TestDatabase db = getDB(request);
         switch (request.getParameter("action")) {
             case "edit":
-                Venue m = db.getVenue(Integer.parseInt(request.getParameter("id")));
-                if (m != null) {
-                    m.setName(request.getParameter("name"));
+                Venue v = db.getVenue(Integer.parseInt(request.getParameter("id")));
+                if (v != null) {
+                    v.setImg(request.getParameter("image"));
+                    v.setName(request.getParameter("name"));
+                    v.setType(request.getParameter("type"));
+                    v.setCapacity(request.getParameter("capacity"));
+                    v.setLocation(request.getParameter("location"));
+                    v.setDescription(request.getParameter("description"));
+                    v.setBookingFee(Integer.parseInt(request.getParameter("bookingfee")));
+                    v.setListOnBookingSystem(request.getParameter("listonbooking") != null);
                 }
-                response.sendRedirect("staff?action=manageMember");
+                response.sendRedirect("staff?action=listVenue");
                 break;
+
             case "create":
-                db.addMember(request.getParameter("username"),
-                        request.getParameter("password"),
-                        request.getParameter("name"));
-                response.sendRedirect("staff?action=manageMember");
+                db.addVenue(Integer.parseInt(request.getParameter("bookingfee")),
+                        request.getParameter("image"),
+                        request.getParameter("name"),
+                        request.getParameter("type"),
+                        request.getParameter("capacity"),
+                        request.getParameter("location"),
+                        request.getParameter("description"),
+                        request.getParameter("listonbooking") != null);
+                response.sendRedirect("staff?action=listVenue");
                 break;
             default:
                 break;
