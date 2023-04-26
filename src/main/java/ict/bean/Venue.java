@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package bean;
+package ict.bean;
 
 import java.io.Serializable;
 
@@ -67,10 +67,20 @@ public class Venue implements Serializable {
     public void setDescription(String description) {
         this.description = description;
     }
-    private int bookingFee;
-    private String img, name,  type, capacity, location, description;
+    private int id, bookingFee;
+    private String img, name, type, capacity, location, description;
+    private boolean ListOnBookingSystem;
 
-    public Venue(int bookingFee, String img, String name, String type, String capacity, String location, String description) {
+    public boolean isListOnBookingSystem() {
+        return ListOnBookingSystem;
+    }
+
+    public void setListOnBookingSystem(boolean ListOnBookingSystem) {
+        this.ListOnBookingSystem = ListOnBookingSystem;
+    }
+
+    public Venue(int id, int bookingFee, String img, String name, String type, String capacity, String location, String description, boolean ListOnBookingSystem) {
+        this.id = id;
         this.bookingFee = bookingFee;
         this.img = img;
         this.name = name;
@@ -78,8 +88,18 @@ public class Venue implements Serializable {
         this.capacity = capacity;
         this.location = location;
         this.description = description;
+        this.ListOnBookingSystem = ListOnBookingSystem;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public Venue() {
+        this.ListOnBookingSystem = false;
     }
 }
