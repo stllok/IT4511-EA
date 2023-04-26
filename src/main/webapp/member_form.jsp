@@ -4,7 +4,7 @@
     Author     : kelvinleung
 --%>
 
-<%@page import="java.util.*, bean.*" %>
+<%@page import="java.util.*, ict.bean.*" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

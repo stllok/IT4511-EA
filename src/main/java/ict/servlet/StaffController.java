@@ -2,11 +2,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package servlet;
+package ict.servlet;
 
-import bean.Venue;
-import bean.VenueMember;
-import db.TestDatabase;
+import ict.bean.Staff;
+import ict.bean.Venue;
+import ict.bean.VenueMember;
+import ict.db.TestDatabase;
+import ict.util.LoginSession;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -37,9 +39,9 @@ public class StaffController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        if (!isValidLogin()) {
-
-        }
+        if (!LoginSession.isAdmin(request)) {
+            response.sendRedirect("index.jsp");
+        } else {
         TestDatabase db = getDB(request);
         switch (request.getParameter("action")) {
             case "listMember":
@@ -111,16 +113,43 @@ public class StaffController extends HttpServlet {
                 response.getWriter().println("Action not found...");
                 break;
         }
+
+        }
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        TestDatabase db = getDB(request);
+        Staff s = null;
+        switch (request.getParameter("action")) {
+            case "edit":
+                break;
+            case "create":
+                break;
+            case "login":
+                if (LoginSession.isLogin(request)) {
+                    LoginSession.toMainPage(request, response);
+                } else {
+                    s = db.getStaff(request.getParameter("username"));
+                    if (s != null) {
+                        if (s.isPasswordMatch(request.getParameter("password"))) {
+                            LoginSession.setLoginSession(request, s);
+                            LoginSession.toMainPage(request, response);                            
+                        } else {
+                            response.sendRedirect("login_error.jsp");
+                        }
+                    } else {
+                        response.sendRedirect("login_error.jsp");
+                    }
+                    
+                }
+                break;
+            default:
+                LoginSession.toMainPage(request, response);                
+                break;
+        }
 
-    }
-
-    private boolean isValidLogin() {
-        return true;
     }
 
 }

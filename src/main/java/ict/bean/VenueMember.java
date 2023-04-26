@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package bean;
+package ict.bean;
 
 import java.io.Serializable;
 
@@ -10,10 +10,10 @@ import java.io.Serializable;
  *
  * @author kelvinleung
  */
-public class SeniorStaff implements Serializable {
+public class VenueMember implements Serializable, BaseRole {
 
     private int id;
-    private String username, password;
+    private String username, name, password;
 
     public String getPassword() {
         return password;
@@ -23,7 +23,7 @@ public class SeniorStaff implements Serializable {
         this.password = password;
     }
 
-    public SeniorStaff() {
+    public VenueMember() {
     }
 
     public int getId() {
@@ -42,10 +42,33 @@ public class SeniorStaff implements Serializable {
         this.username = username;
     }
 
-    public SeniorStaff(int id, String username, String name, String password) {
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public VenueMember(int id, String username, String name, String password) {
         this.id = id;
         this.username = username;
+        this.name = name;
         this.password = password;
     }
 
+    @Override
+    public boolean isPasswordMatch(String inputPassword) {
+        return (inputPassword == null ? false : inputPassword.equals(password));
+    }
+
+    @Override
+    public boolean isAdmin() {
+        return false;
+    }
+
+    @Override
+    public boolean isSuperadmin() {
+        return false;
+    }
 }

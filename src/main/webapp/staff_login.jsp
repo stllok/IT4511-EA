@@ -9,11 +9,11 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Member login</title>
+        <title>Staff login</title>
     </head>
     <body>
-        <h1>Member login</h1>
-        <form method="post" action="member">
+        <h1>Staff login</h1>
+        <form method="post" action="staff">
             <input type="hidden" name="action" value="login" />
             <table>
                 <tr>

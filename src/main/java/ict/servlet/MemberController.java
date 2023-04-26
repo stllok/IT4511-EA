@@ -2,11 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package servlet;
+package ict.servlet;
 
-import bean.Staff;
-import bean.VenueMember;
-import db.TestDatabase;
+import ict.bean.Staff;
+import ict.bean.VenueMember;
+import ict.db.TestDatabase;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -14,6 +14,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
+import ict.util.LoginSession;
 
 /**
  *
@@ -21,11 +22,11 @@ import java.io.IOException;
  */
 @WebServlet(name = "MemberController", urlPatterns = {"/member"})
 public class MemberController extends HttpServlet {
-
+    
     @Override
     public void init() {
     }
-
+    
     private TestDatabase getDB(HttpServletRequest request) {
         TestDatabase db = (TestDatabase) request.getSession().getAttribute("db");
         if (db == null) {
@@ -33,7 +34,7 @@ public class MemberController extends HttpServlet {
         }
         return db;
     }
-
+    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -44,17 +45,19 @@ public class MemberController extends HttpServlet {
                 response.sendRedirect("staff?action=listMember");
                 break;
             default:
+                LoginSession.toMainPage(request, response);                
                 break;
         }
     }
-
+    
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         TestDatabase db = getDB(request);
+        VenueMember m = null;
         switch (request.getParameter("action")) {
             case "edit":
-                VenueMember m = db.getMember(Integer.parseInt(request.getParameter("id")));
+                m = db.getMember(Integer.parseInt(request.getParameter("id")));
                 if (m != null) {
                     m.setName(request.getParameter("name"));
                     m.setUsername(request.getParameter("username"));
@@ -68,7 +71,26 @@ public class MemberController extends HttpServlet {
                         request.getParameter("name"));
                 response.sendRedirect("staff?action=listMember");
                 break;
+            case "login":
+                if (LoginSession.isLogin(request)) {
+                    LoginSession.toMainPage(request, response);
+                } else {
+                    m = db.getMember(request.getParameter("username"));
+                    if (m != null) {
+                        if (m.isPasswordMatch(request.getParameter("password"))) {
+                            LoginSession.setLoginSession(request, m);
+                            LoginSession.toMainPage(request, response);                            
+                        } else {
+                            response.sendRedirect("login_error.jsp");
+                        }
+                    } else {
+                        response.sendRedirect("login_error.jsp");
+                    }
+                    
+                }
+                break;
             default:
+                LoginSession.toMainPage(request, response);                
                 break;
         }
     }
