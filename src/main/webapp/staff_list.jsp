@@ -41,6 +41,6 @@
         </table>
 
         <hr />
-        <a href="#">Back</a>
+        <a onclick="history.back();" href="#">Back</a>
     </body>
 </html>

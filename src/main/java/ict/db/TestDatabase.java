@@ -16,14 +16,14 @@ import java.util.ArrayList;
  */
 public class TestDatabase {
 
-    private ArrayList<VenueMember> ms = new ArrayList<>();
-    private int ms_idx = 4;
-    private ArrayList<Staff> ss = new ArrayList<>();
-    private int ss_idx = 4;
-    private ArrayList<SeniorStaff> sss = new ArrayList<>();
-    private int sss_idx = 4;
-    private ArrayList<Venue> vs = new ArrayList<>();
-    private int vs_idx = 2;
+    private static ArrayList<VenueMember> ms = new ArrayList<>();
+    private static int ms_idx = 4;
+    private static ArrayList<Staff> ss = new ArrayList<>();
+    private static int ss_idx = 4;
+    private static ArrayList<SeniorStaff> sss = new ArrayList<>();
+    private static int sss_idx = 4;
+    private static ArrayList<Venue> vs = new ArrayList<>();
+    private static int vs_idx = 2;
 
     public ArrayList<VenueMember> getMembers() {
         return ms;
@@ -117,15 +117,23 @@ public class TestDatabase {
     }
 
     public TestDatabase() {
-        ms.add(new VenueMember(1, "username1", "name1", "123"));
-        ms.add(new VenueMember(2, "username2", "name2", "234"));
-        ms.add(new VenueMember(3, "username3", "name3", "345"));
-        ss.add(new Staff(1, "staff1", "123"));
-        ss.add(new Staff(2, "staff2", "234"));
-        ss.add(new Staff(3, "staff3", "345"));
-        sss.add(new SeniorStaff(1, "seniorstaff1", "123"));
-        sss.add(new SeniorStaff(2, "seniorstaff2", "234"));
-        sss.add(new SeniorStaff(3, "seniorstaff3", "345"));
-        vs.add(new Venue(1, 72, "SAMPLE IMAGE", "Sample Venue 1", "Sample Type 1", "72x72", "Sample Location", "Sample Description", true));
+        if (ms.isEmpty()) {
+            ms.add(new VenueMember(1, "username1", "name1", "123"));
+            ms.add(new VenueMember(2, "username2", "name2", "234"));
+            ms.add(new VenueMember(3, "username3", "name3", "345"));
+        }
+        if (ss.isEmpty()) {
+            ss.add(new Staff(1, "staff1", "123"));
+            ss.add(new Staff(2, "staff2", "234"));
+            ss.add(new Staff(3, "staff3", "345"));
+        }
+        if (sss.isEmpty()) {
+            sss.add(new SeniorStaff(1, "seniorstaff1", "123"));
+            sss.add(new SeniorStaff(2, "seniorstaff2", "234"));
+            sss.add(new SeniorStaff(3, "seniorstaff3", "345"));
+        }
+        if (vs.isEmpty()) {
+            vs.add(new Venue(1, 72, "sample image", "TKO Venue", "bicycle", "700m x 700m", "Tseung Kwan O", "A new generation venue built in 2013", true));
+        }
     }
 }

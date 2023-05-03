@@ -22,11 +22,11 @@ import ict.util.LoginSession;
  */
 @WebServlet(name = "MemberController", urlPatterns = {"/member"})
 public class MemberController extends HttpServlet {
-    
+
     @Override
     public void init() {
     }
-    
+
     private TestDatabase getDB(HttpServletRequest request) {
         TestDatabase db = (TestDatabase) request.getSession().getAttribute("db");
         if (db == null) {
@@ -34,7 +34,7 @@ public class MemberController extends HttpServlet {
         }
         return db;
     }
-    
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -44,12 +44,18 @@ public class MemberController extends HttpServlet {
                 db.removeMember(Integer.parseInt(request.getParameter("id")));
                 response.sendRedirect("staff?action=listMember");
                 break;
+            case "register":
+                request.setAttribute("userAction", "register");
+                request.setAttribute("member", new VenueMember());
+                this.getServletContext()
+                        .getRequestDispatcher("/member_form.jsp")
+                        .forward(request, response);
             default:
-                LoginSession.toMainPage(request, response);                
+                LoginSession.toMainPage(request, response);
                 break;
         }
     }
-    
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -79,18 +85,23 @@ public class MemberController extends HttpServlet {
                     if (m != null) {
                         if (m.isPasswordMatch(request.getParameter("password"))) {
                             LoginSession.setLoginSession(request, m);
-                            LoginSession.toMainPage(request, response);                            
+                            LoginSession.toMainPage(request, response);
                         } else {
                             response.sendRedirect("login_error.jsp");
                         }
                     } else {
                         response.sendRedirect("login_error.jsp");
                     }
-                    
+
                 }
                 break;
+            case "register":
+                db.addMember(request.getParameter("username"),
+                        request.getParameter("password"),
+                        request.getParameter("name"));
+                response.sendRedirect("member_login.jsp");
             default:
-                LoginSession.toMainPage(request, response);                
+                LoginSession.toMainPage(request, response);
                 break;
         }
     }

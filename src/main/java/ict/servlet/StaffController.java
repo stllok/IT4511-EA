@@ -55,19 +55,19 @@ public class StaffController extends HttpServlet {
                 break;
             case "modifyMember":
                 try {
-                VenueMember m = db.getMember(Integer.parseInt(request.getParameter("id")));
-                if (m != null) {
-                    request.setAttribute("userAction", "edit");
-                    request.setAttribute("member", m);
-                    this.getServletContext()
-                            .getRequestDispatcher("/member_form.jsp")
-                            .forward(request, response);
-                } else {
+                    VenueMember m = db.getMember(Integer.parseInt(request.getParameter("id")));
+                    if (m != null) {
+                        request.setAttribute("userAction", "edit");
+                        request.setAttribute("member", m);
+                        this.getServletContext()
+                                .getRequestDispatcher("/member_form.jsp")
+                                .forward(request, response);
+                    } else {
+                        response.sendRedirect("staff?action=listMember");
+                    }
+                } catch (Exception e) {
                     response.sendRedirect("staff?action=listMember");
                 }
-            } catch (Exception e) {
-                response.sendRedirect("staff?action=listMember");
-            }
             break;
             case "addMember":
                 request.setAttribute("userAction", "create");

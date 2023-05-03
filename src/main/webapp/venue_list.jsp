@@ -10,7 +10,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Member Management</title>
+        <title>Venue Management</title>
         <style>
             td {
                 text-align: center;
@@ -19,7 +19,7 @@
     </head>
     <body>
         <jsp:useBean id="venues" scope="request" class="ArrayList<Venue>" />
-        <h1>Member management</h1>
+        <h1>Venue management</h1>
 
         <table border="1">
             <tr>
@@ -55,6 +55,6 @@
         </table>
 
         <hr />
-        <a href="#">Back</a>
+        <a href="staff_index.jsp">Back</a>
     </body>
 </html>

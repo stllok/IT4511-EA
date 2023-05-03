@@ -6,7 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8" errorPage="index.jsp"%>
 <%@page import="java.util.*, ict.util.*, ict.bean.*" %>
-<jsp:useBean id="userInfo" scope="session" class="Staff" />
+<jsp:useBean id="userInfo" scope="session" class="VenueMember" />
 <!DOCTYPE html>
 <html>
     <head>

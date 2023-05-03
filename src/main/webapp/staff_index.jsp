@@ -15,6 +15,10 @@
     </head>
     <body>
         <h1>Hello <%=userInfo.getUsername() %>!</h1>
+        <ul style="list-style: none;">
+            <li><a href="staff?action=listMember">Manage Member</a></li>
+            <li><a href="staff?action=listVenue">Manage Venue</a></li>
+        </ul>
         <hr/>
         <a href="logout">Logout</a>
     </body>

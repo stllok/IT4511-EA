@@ -43,6 +43,6 @@
         </table>
 
         <hr />
-        <a href="#">Back</a>
+        <a href="staff_index.jsp">Back</a>
     </body>
 </html>

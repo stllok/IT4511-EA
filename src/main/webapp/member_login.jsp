@@ -26,6 +26,7 @@
                 </tr>
                 <tr>
                     <td><input type="button" onclick="history.back();" value="Back"/></td>
+                    <td><a href="member?action=register"><input type="button" value="Register"/></a></td>
                     <td><input type="submit" value="Login"/></td>
                 </tr>
             </table>

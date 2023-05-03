@@ -12,11 +12,11 @@ LoginSession.toMainPage(request, response);
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Example Company Main Page</title>
+        <title>Main Page</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     </head>
     <body>
-        <h1>Example Company Main Page</h1>
+        <h1>Main Page</h1>
         <ul style="
             list-style: none;
             ">
